@@ -1,8 +1,8 @@
 import axios from 'axios'
 import storage from '@/utils/storage'
-
+const baseURL = '/api/'
 const http = axios.create({
-  baseURL: '/server/',
+  baseURL: baseURL,
   timeout: 5000, //请求超时时间
 })
 // 添加请求拦截器

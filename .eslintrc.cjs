@@ -4,11 +4,14 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  // extends: [
-  //   'eslint:recommended',
-  //   'plugin:react/recommended',
-  //   'plugin:prettier/recommended',
-  // ],
+  extends: [
+    // 继承eslint推荐的检查规则
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    // 关闭 eslint 中所有不必要的或可能与 prettier 冲突的规则
+    'plugin:prettier/recommended',
+  ],
   overrides: [
     {
       files: ['.eslintrc.{js,cjs}'],
@@ -35,7 +38,6 @@ module.exports = {
    * "error" 或 2  ==>  规则作为一个错误（代码不能执行，界面报错）
    */
   rules: {
-    // js 详细规则：http://eslint.cn/docs/rules/
     /** @js */
     quotes: [2, 'single'], // 强制使用一致的单引号
     semi: [2, 'never'], // 强制是否使用分号
@@ -45,5 +47,7 @@ module.exports = {
     'no-console': 'off', //  是否允许使用console
     /** @react */
     'react-refresh/only-export-components': 'off',
+    'react/react-in-jsx-scope': 'off', // React17后不需要在jsx中主动引入react
+    'react/prop-types': 'off',
   },
 }

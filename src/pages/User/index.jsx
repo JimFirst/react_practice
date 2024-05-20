@@ -1,7 +1,5 @@
 function user() {
-  return (
-      <div>user</div>
-  )
+  return <div>user</div>
 }
 
 export default user

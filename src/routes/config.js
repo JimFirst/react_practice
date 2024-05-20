@@ -1,11 +1,11 @@
-import Home from "../pages/Home";
-import User from "../pages/User";
-import BaseLayouts from '../layouts';
+import Home from '../pages/Home'
+import User from '../pages/User'
+import BaseLayouts from '../layouts'
 // import HomeDetail from "../pages/Home/HomeDetail";
-import { lazy } from "react";
+import { lazy } from 'react'
 
-
-const config = [{
+const config = [
+  {
     path: '/',
     Component: BaseLayouts,
     children: [
@@ -19,16 +19,17 @@ const config = [{
       },
       {
         path: 'home/:id',
-        Component: lazy(() => import('../pages/Home/HomeDetail')),
-        loader: (params) => {
+        Component: lazy(() => import('@/pages/Home/HomeDetail')),
+        loader: params => {
           console.log('loader', '可以鉴权，也可以获取列表数据', params)
           return 111
-        }
+        },
       },
       {
         path: 'user',
-        Component: User
-      }
-    ]
-}]
+        Component: User,
+      },
+    ],
+  },
+]
 export default config

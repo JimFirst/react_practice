@@ -1,4 +1,4 @@
-import { useLoaderData, useLocation, useParams } from "react-router-dom"
+import { useLoaderData, useLocation, useParams } from 'react-router-dom'
 
 function HomeDetail() {
   const { id } = useParams()

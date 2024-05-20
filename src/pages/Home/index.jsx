@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import Hello from '../../components/Hello'
 import { useNavigate } from 'react-router-dom'
+import services from '@/services'
+
 function Home() {
   const [c, SetC] = useState(0)
   function add() {
@@ -12,6 +14,10 @@ function Home() {
     navigate('/home/1', {
       name: 1,
     })
+  }
+  test()
+  async function test() {
+    await services.user.login()
   }
   return (
     <div>

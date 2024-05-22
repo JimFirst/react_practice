@@ -51,3 +51,7 @@ $ npm start
 └─ README.md
 
 ```
+
+## 状态管理工具
+
+[zustand](https://github.com/pmndrs/zustand)

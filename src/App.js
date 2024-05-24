@@ -1,12 +1,16 @@
-import router from './routes/index'
-import { RouterProvider } from 'react-router-dom'
-import { Suspense } from 'react'
+import createRouter, { baseRoutes, dynamicRoutes } from './routes/index'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { Suspense, StrictMode } from 'react'
 
 function App() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <RouterProvider router={router}></RouterProvider>
-    </Suspense>
+    <StrictMode>
+      <Suspense fallback={<div>Loading...</div>}>
+        <RouterProvider
+          router={createBrowserRouter([...dynamicRoutes, ...baseRoutes])}
+        ></RouterProvider>
+      </Suspense>
+    </StrictMode>
   )
 }
 

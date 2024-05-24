@@ -34,10 +34,9 @@ $ npm start
 │  │     ├─ empty.png
 │  ├─ components 公用组件目录
 │  ├─ constants 常量目录
+│  ├─ layouts 常用包裹组件
 │  ├─ pages 业务目录
 │  │  ├─ 404.tsx
-│  │  ├─ AppRouter.tsx 路由组件，勿删
-│  │  └─ Layout.tsx 全局包裹组件
 │  ├─ services api目录
 │  │  ├─ index.ts api出口
 │  │  └─ request.ts 请求工具
@@ -47,7 +46,6 @@ $ npm start
 ├─ .gitignore
 ├─ package-lock.json
 ├─ package.json
-├─ tsconfig.json
 └─ README.md
 
 ```

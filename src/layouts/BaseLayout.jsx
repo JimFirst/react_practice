@@ -4,7 +4,6 @@ import Header from './components/Header'
 import SiderBar from './components/SiderBar'
 const { Sider, Content } = Layout
 function BaseLayout() {
-  console.log('base')
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider

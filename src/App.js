@@ -1,14 +1,27 @@
-import createRouter, { baseRoutes, dynamicRoutes } from './routes/index'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import createRouter from './routes/index'
+import { RouterProvider } from 'react-router-dom'
 import { Suspense, StrictMode } from 'react'
+import { Skeleton, App as AntdApp, ConfigProvider } from 'antd'
+import antdConfig from './antdConfig'
+import {
+  legacyLogicalPropertiesTransformer,
+  StyleProvider,
+} from '@ant-design/cssinjs'
 
 function App() {
   return (
     <StrictMode>
-      <Suspense fallback={<div>Loading...</div>}>
-        <RouterProvider
-          router={createBrowserRouter([...dynamicRoutes, ...baseRoutes])}
-        ></RouterProvider>
+      <Suspense fallback={<Skeleton active />}>
+        <StyleProvider
+          hashPriority="high"
+          transformers={[legacyLogicalPropertiesTransformer]}
+        >
+          <ConfigProvider {...antdConfig}>
+            <AntdApp>
+              <RouterProvider router={createRouter()}></RouterProvider>
+            </AntdApp>
+          </ConfigProvider>
+        </StyleProvider>
       </Suspense>
     </StrictMode>
   )

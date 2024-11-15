@@ -1,6 +1,5 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { lazy } from 'react'
-import { cloneDeep } from 'lodash'
 
 import Home from '../pages/Home'
 import AuthRoute from '../components/AuthRoute'
@@ -21,46 +20,41 @@ const baseRoutes = [
 ]
 const dynamicRoutes = [
   {
-    path: '/',
-    element: <BaseLayout />,
+    path: '',
+    element: <AuthRoute />,
     errorElement: <Navigate to="/404" replace={true} />,
     children: [
       {
-        index: true,
-        element: <Home />,
+        path: '/',
+        element: <BaseLayout />,
+        handle: {
+          hidden: true,
+        },
+        children: [
+          {
+            index: true,
+            element: <Home />,
+          },
+          {
+            path: 'home',
+            element: <Home />,
+          },
+        ],
       },
       {
-        path: 'home',
-        element: <Home />,
+        path: '/customer',
+        element: <BaseLayout />,
+        handle: {
+          label: '客户管理',
+        },
+        children: [...customer],
       },
     ],
-  },
-  {
-    path: '/customer',
-    element: <BaseLayout />,
-    children: [...customer],
   },
 ]
 
 function createRouter() {
-  const routers = traversalRoutes(cloneDeep(dynamicRoutes))
-  return createBrowserRouter([...routers, ...baseRoutes])
-}
-function traversalRoutes(tree = []) {
-  tree.forEach(item => {
-    if (item.children) {
-      item.children = item.children.map(child => {
-        child.element = (
-          <AuthRoute
-            element={child.element}
-            code={child.meta?.authorzation}
-          ></AuthRoute>
-        )
-        return child
-      })
-    }
-  })
-  return tree
+  return createBrowserRouter([...dynamicRoutes, ...baseRoutes])
 }
 export default createRouter
 export { baseRoutes, dynamicRoutes }

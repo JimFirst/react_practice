@@ -1,4 +1,4 @@
-import { useStore } from '@/store'
+import useStore from '@/store'
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 

@@ -1,16 +1,17 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate, useMatches } from 'react-router-dom'
 import { usePermission } from '@/hooks'
-const AuthRoute = ({ element, code }) => {
-  console.log('auth')
-  if (!code) return element
-  const isPermit = usePermission(code)
-  if (!isPermit) {
-    return <Navigate to="/login" />
+import { Outlet } from 'react-router-dom'
+const AuthRoute = ({ children }) => {
+  const matchs = useMatches
+  if (!matchs.length) {
+    return children ? children : <Outlet />
   }
-  // if (userRole !== 'admin') {
-  //   return <Navigate to="/unauthorized" />
-  // }
-  return element
+  const authorzation = matchs[matchs.length - 1].handle?.authorzation
+  const isPermit = usePermission(authorzation)
+  if (!isPermit) {
+    return <Navigate to="/404" />
+  }
+  return children ? children : <Outlet />
 }
 
 export default AuthRoute

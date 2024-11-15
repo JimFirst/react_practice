@@ -1,76 +1,65 @@
 import { Menu } from 'antd'
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  SettingOutlined,
-} from '@ant-design/icons'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, useMatches } from 'react-router-dom'
+import { dynamicRoutes } from '@/routes'
+import { cloneDeep } from 'lodash'
+import useStore from '@/store'
 
-const menus = [
-  {
-    key: '/customer',
-    label: '客户管理',
-    icon: <MailOutlined />,
-    children: [
-      {
-        key: '/customer/add',
-        label: '新增客户',
-      },
-      {
-        key: '/customer/list',
-        label: '客户查询',
-      },
-    ],
-  },
-  {
-    key: 'sub2',
-    label: '项目管理',
-    icon: <AppstoreOutlined />,
-    children: [
-      { key: '5', label: '新增项目' },
-      { key: '6', label: '项目查询' },
-      { key: '7', label: '项目种类设置' },
-    ],
-  },
-  {
-    key: 'sub4',
-    label: '人力资源',
-    icon: <SettingOutlined />,
-    children: [
-      { key: '9', label: '组织架构' },
-      { key: '10', label: '人员管理' },
-    ],
-  },
-  {
-    key: 'grp',
-    label: '系统管理',
-    icon: <SettingOutlined />,
-    children: [
-      { key: '13', label: '菜单管理' },
-      { key: '14', label: '内容管理' },
-      { key: '15', label: '角色管理' },
-      { key: '16', label: '角色分配' },
-      { key: '17', label: '系统日志' },
-    ],
-  },
-]
-export default function SiderBar() {
+export default function SiderBar(width) {
+  const { permissions } = useStore()
+  const menus = getMenus(
+    cloneDeep(dynamicRoutes[0].children),
+    permissions,
+  ).filter(item => item.children.length)
+
   const navigate = useNavigate()
-  const loaction = useLocation()
-  // const selectedKey = loaction.pathname
-
-  console.log(loaction)
-  function onClick({ key }) {
+  function menuClick({ key }) {
     navigate(key)
+  }
+  const location = useLocation()
+  const matches = useMatches()
+  const selectedKey = matches[1]?.handle?.active || location.pathname
+  function getOpenKeys() {
+    if (matches.length) {
+      return [matches[0].pathname]
+    }
+    return []
   }
   return (
     <Menu
-      onClick={onClick}
-      style={{ width: 256 }}
-      defaultOpenKeys={['/customer']}
-      // defaultSelectedKeys={[selectedKey]}
+      onClick={menuClick}
+      style={{ width }}
+      defaultOpenKeys={getOpenKeys()}
+      selectedKeys={[selectedKey]}
       mode="inline"
       items={menus}
     />
   )
+}
+
+function getMenus(menuList, permissions, parentPath) {
+  return menuList
+    .filter(item => {
+      const authorzation = item.handle?.authorzation
+      const permit = isPermit(authorzation, permissions)
+      return !item.handle?.hidden && permit
+    })
+    .map(item => {
+      if (item.children) {
+        item.children = getMenus(item.children, permissions, item.path)
+      }
+      return {
+        key: parentPath ? `${parentPath}/${item.path}` : item.path,
+        label: item.handle?.label,
+        icon: item.handle?.icon,
+        children: item.children,
+      }
+    })
+}
+
+function isPermit(authorzation, permissions) {
+  if (!authorzation) return true
+  if (Array.isArray(authorzation)) {
+    return permissions.some(code => authorzation.includes(code))
+  }
+  return permissions?.includes(authorzation)
 }

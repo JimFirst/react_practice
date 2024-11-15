@@ -1,21 +1,29 @@
-import { http } from '@/utils/http'
+import { getHttp } from '@/utils/http'
+import { message as Message } from 'antd'
 
-export const httpRequest = async (url, options = {}) => {
+export const httpRequest = async (url, options = {}, model) => {
   try {
+    const http = getHttp(model)
     const res = await http({
       url,
       ...options,
     })
-    if (!res?.success) {
-      throw new Error('httpRequest get nothing from server!')
-    } else {
-      return res
+    if (res?.code !== 0) {
+      if ([401, 403].includes(res.code)) {
+        location.href = '/login'
+        Message.error('登录已超时，请重新登录')
+      } else {
+        Message.error(res.message || '服务无响应')
+      }
     }
+    return res
   } catch (error) {
-    console.error('httpRequest error: ', error)
+    console.error(error)
+    const { code, message } = error
+    Message.error(message || '服务无响应')
     return {
-      success: false,
-      message: '服务无响应数据',
+      code: code || 1,
+      message: message,
       data: null,
     }
   }

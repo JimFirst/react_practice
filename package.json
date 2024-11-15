@@ -10,7 +10,7 @@
     "antd": "^5.17.2",
     "axios": "^1.6.8",
     "loadsh": "^0.0.4",
-    "node-sass": "^7.0.3",
+    "sass": "^1.77.6",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-router-dom": "^6.22.1",
@@ -19,9 +19,9 @@
     "zustand": "^4.5.2"
   },
   "scripts": {
-    "start": "set PORT=9527 && craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "cross-env set PORT=9527 && craco start",
+    "build": "cross-env craco build",
+    "test": "cross-env craco test",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
     "lint:fix": "eslint --fix . --ext .js,.ts,.jsx,.tsx"
@@ -48,6 +48,7 @@
     "@craco/craco": "^7.1.0",
     "@eslint/js": "^9.3.0",
     "@typescript-eslint/parser": "^5.62.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
@@ -56,5 +57,8 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "globals": "^15.3.0",
     "prettier": "^3.2.5"
+  },
+  "engines": {
+    "node": ">=18.0"
   }
 }

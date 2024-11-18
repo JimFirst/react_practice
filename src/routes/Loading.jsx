@@ -1,4 +1,4 @@
-import { Skeleton } from 'antd'
+import { Skeleton } from 'antd-mobile'
 import { Suspense } from 'react'
 
 export default function Loading({ children }) {

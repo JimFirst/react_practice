@@ -7,7 +7,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "antd": "^5.17.2",
+    "antd-mobile": "^5.38.1",
     "axios": "^1.6.8",
     "dayjs": "^1.11.13",
     "loadsh": "^0.0.4",
@@ -20,7 +20,7 @@
     "zustand": "^4.5.2"
   },
   "scripts": {
-    "start": "cross-env set PORT=9527 && craco start",
+    "start": "cross-env PORT=9527 craco start",
     "build": "cross-env craco build",
     "test": "cross-env craco test",
     "eject": "react-scripts eject",

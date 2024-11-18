@@ -2,20 +2,15 @@ import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { lazy } from 'react'
 
 import Home from '../pages/Home'
-import AuthRoute from '../components/AuthRoute'
-const Login = lazy(() => import('@/pages/Login'))
-import BaseLayout from '../layouts/BaseLayout'
+import AuthRoute from './AuthRoute'
+import PageLayout from '../layouts/PageLayout'
 
-import customer from './customer'
+import sample from './sample'
 const Page404 = lazy(() => import('@/pages/404'))
 const baseRoutes = [
   {
     path: '404',
     element: <Page404 />,
-  },
-  {
-    path: '/login',
-    element: <Login />,
   },
 ]
 const dynamicRoutes = [
@@ -26,7 +21,7 @@ const dynamicRoutes = [
     children: [
       {
         path: '/',
-        element: <BaseLayout />,
+        element: <PageLayout header={false} />,
         handle: {
           hidden: true,
         },
@@ -42,12 +37,12 @@ const dynamicRoutes = [
         ],
       },
       {
-        path: '/customer',
-        element: <BaseLayout />,
+        path: '/sample',
+        element: <PageLayout />,
         handle: {
           label: '客户管理',
         },
-        children: [...customer],
+        children: [...sample],
       },
     ],
   },

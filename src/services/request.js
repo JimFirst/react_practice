@@ -1,5 +1,5 @@
 import { getHttp } from '@/utils/http'
-import { message as Message } from 'antd'
+import { message as Message } from 'antd-mobile'
 
 export const httpRequest = async (url, options = {}, model) => {
   try {

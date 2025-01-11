@@ -8,7 +8,6 @@ module.exports = {
     // 继承eslint推荐的检查规则
     'eslint:recommended',
     'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
     // 关闭 eslint 中所有不必要的或可能与 prettier 冲突的规则
     'plugin:prettier/recommended',
   ],
@@ -20,12 +19,10 @@ module.exports = {
       },
     },
   ],
-  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'react'],
   settings: {
     react: {
       version: 'detect',

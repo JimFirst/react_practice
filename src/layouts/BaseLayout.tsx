@@ -1,8 +1,10 @@
-import { Outlet } from 'react-router-dom'
-import { Layout } from 'antd'
-import Header from './components/Header'
-import SiderBar from './components/SiderBar'
-const { Sider, Content } = Layout
+import { Outlet } from 'react-router-dom';
+import { Layout } from 'antd';
+import Header from './components/Header';
+import SiderBar from './components/SiderBar';
+
+const { Sider, Content } = Layout;
+
 function BaseLayout() {
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -26,7 +28,7 @@ function BaseLayout() {
         </Content>
       </Layout>
     </Layout>
-  )
+  );
 }
 
-export default BaseLayout
+export default BaseLayout;

@@ -1,12 +1,12 @@
-import createRouter from './routes/index'
-import { RouterProvider } from 'react-router-dom'
-import { Suspense, StrictMode } from 'react'
-import { Skeleton, App as AntdApp, ConfigProvider } from 'antd'
-import antdConfig from './antdConfig'
+import createRouter from './routes';
+import { RouterProvider } from 'react-router-dom';
+import { Suspense, StrictMode } from 'react';
+import { Skeleton, App as AntdApp, ConfigProvider } from 'antd';
+import antdConfig from './antdConfig';
 import {
   legacyLogicalPropertiesTransformer,
   StyleProvider,
-} from '@ant-design/cssinjs'
+} from '@ant-design/cssinjs';
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
         </StyleProvider>
       </Suspense>
     </StrictMode>
-  )
+  );
 }
 
-export default App
+export default App;

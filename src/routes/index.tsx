@@ -1,14 +1,34 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { lazy } from 'react'
+import type { RouteObject } from 'react-router-dom'
 
 import Home from '../pages/Home'
 import AuthRoute from '../components/AuthRoute'
-const Login = lazy(() => import('@/pages/Login'))
-import BaseLayout from '../layouts/BaseLayout'
 
+const Login = lazy(() => import('@/pages/Login'))
+import BaseLayout from '@/layouts/BaseLayout'
 import customer from './customer'
+
 const Page404 = lazy(() => import('@/pages/404'))
-const baseRoutes = [
+
+interface RouteHandle {
+  hidden?: boolean
+  label?: string
+  icon?: React.ReactNode
+  authorization?: string | string[]
+  active?: string
+}
+
+type AppRouteObject = {
+  path?: string
+  index?: boolean
+  element?: React.ReactNode
+  handle?: RouteHandle
+  children?: AppRouteObject[]
+  errorElement?: React.ReactNode
+}
+
+const baseRoutes: AppRouteObject[] = [
   {
     path: '404',
     element: <Page404 />,
@@ -18,11 +38,12 @@ const baseRoutes = [
     element: <Login />,
   },
 ]
-const dynamicRoutes = [
+
+const dynamicRoutes: AppRouteObject[] = [
   {
     path: '',
     element: <AuthRoute />,
-    errorElement: <Navigate to="/404" replace={true} />,
+    errorElement: <Navigate to="/404" replace />,
     children: [
       {
         path: '/',
@@ -31,10 +52,6 @@ const dynamicRoutes = [
           hidden: true,
         },
         children: [
-          {
-            index: true,
-            element: <Home />,
-          },
           {
             path: 'home',
             element: <Home />,
@@ -47,14 +64,16 @@ const dynamicRoutes = [
         handle: {
           label: '客户管理',
         },
-        children: [...customer],
+        children: [...customer] as AppRouteObject[],
       },
     ],
   },
 ]
 
 function createRouter() {
-  return createBrowserRouter([...dynamicRoutes, ...baseRoutes])
+  return createBrowserRouter([...dynamicRoutes, ...baseRoutes] as RouteObject[])
 }
+
 export default createRouter
 export { baseRoutes, dynamicRoutes }
+export type { AppRouteObject as RouteObject, RouteHandle }

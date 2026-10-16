@@ -71,7 +71,12 @@ const dynamicRoutes: AppRouteObject[] = [
 ]
 
 function createRouter() {
-  return createBrowserRouter([...dynamicRoutes, ...baseRoutes] as RouteObject[])
+  return createBrowserRouter(
+    [...dynamicRoutes, ...baseRoutes] as RouteObject[],
+    {
+      basename: process.env.PUBLIC_URL,
+    },
+  )
 }
 
 export default createRouter

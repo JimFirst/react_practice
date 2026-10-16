@@ -1,9 +1,9 @@
-import { Outlet } from 'react-router-dom';
-import { Layout } from 'antd';
-import Header from './components/Header';
-import SiderBar from './components/SiderBar';
+import { Outlet } from 'react-router-dom'
+import { Layout } from 'antd'
+import Header from './components/Header'
+import SiderBar from './components/SiderBar'
 
-const { Sider, Content } = Layout;
+const { Sider, Content } = Layout
 
 function BaseLayout() {
   return (
@@ -28,7 +28,7 @@ function BaseLayout() {
         </Content>
       </Layout>
     </Layout>
-  );
+  )
 }
 
-export default BaseLayout;
+export default BaseLayout

@@ -1,10 +1,10 @@
-import { lazy, Suspense, ReactNode } from 'react';
-import { Skeleton } from 'antd';
+import { lazy, Suspense, ReactNode } from 'react'
+import { Skeleton } from 'antd'
 
 interface LoadingProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export default function Loading({ children }: LoadingProps) {
-  return <Suspense fallback={<Skeleton active />}>{children}</Suspense>;
+  return <Suspense fallback={<Skeleton active />}>{children}</Suspense>
 }

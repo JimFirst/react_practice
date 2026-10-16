@@ -1,9 +1,9 @@
-import { lazy } from 'react';
-import Loading from './Loading';
-import type { RouteObject } from 'react-router-dom';
+import { lazy } from 'react'
+import Loading from './Loading'
+import type { RouteObject } from 'react-router-dom'
 
-const Edit = lazy(() => import('@/pages/customer/Edit'));
-const List = lazy(() => import('@/pages/customer/List'));
+const Edit = lazy(() => import('@/pages/customer/Edit'))
+const List = lazy(() => import('@/pages/customer/List'))
 
 const customerRoutes: RouteObject[] = [
   {
@@ -40,6 +40,6 @@ const customerRoutes: RouteObject[] = [
       authorization: ['customer'],
     },
   },
-];
+]
 
-export default customerRoutes;
+export default customerRoutes

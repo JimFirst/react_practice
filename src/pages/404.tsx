@@ -1,3 +1,3 @@
 export default function Page404() {
-  return <div>找不到网页404</div>;
+  return <div>找不到网页404</div>
 }

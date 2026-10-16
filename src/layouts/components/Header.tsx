@@ -1,8 +1,8 @@
-import './Header.scss';
-import { Link } from 'react-router-dom';
-import TooltipLink from '@/components/TooltipLink';
-import customer from '@/assets/images/customer.svg';
-import logout from '@/assets/images/logout.svg';
+import './Header.scss'
+import { Link } from 'react-router-dom'
+import TooltipLink from '@/components/TooltipLink'
+import customer from '@/assets/images/customer.svg'
+import logout from '@/assets/images/logout.svg'
 
 export default function Header() {
   return (
@@ -15,5 +15,5 @@ export default function Header() {
         <TooltipLink title="退出系统" src={logout}></TooltipLink>
       </div>
     </div>
-  );
+  )
 }
